@@ -1,0 +1,32 @@
+#content{
+    padding-top: 60px;
+    
+}
+.content{
+   
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.content > button{
+         color: #fff;
+}
+.content> button:hover {
+    background-color: #343a40!important;
+    color: #007bff;
+    border: 1px solid #ced4da;
+}
+
+.cart > a > img {
+    width: 185px;
+    height: 300px;
+}
+
+#films >a {
+    margin: 2px;
+}
+
+#films > div {
+    padding-left: 2px;
+    padding-right: 2px;
+}

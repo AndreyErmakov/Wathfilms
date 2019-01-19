@@ -1,26 +1,44 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route} from 'react-router-dom'
+import {Provider} from 'react-redux'
 import logo from './logo.svg';
 import './App.css';
+
+import Iframe from 'react-iframe'
+import Header from './components/header/Header.js'
+import Home from './components/home/Home'
+// import Movie  from './components/movies/Movies'
+
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider >
+        <BrowserRouter >
+          <div className='container'>
+            <Header />
+
+            <Route exact path='/' component={Home} />
+            {/* <Route exact path='/movies' component={Movies} /> */}
+          </div>
+        </BrowserRouter>
+      </Provider>
+        
+
+        
+       
+        // {/* <Iframe url="//hdgo.club/video/Q298nQsLY481iJzUPrlwVnRh6EqC8Ctd/25886/"
+        //   width="610px"
+        //   height="370px"
+        //   frameborder="0"
+        //   // id="myId"
+        //   // className="myClassname"
+        //   // display="initial"
+        //   // position="relative"
+        //   allowFullScreen/>
+        //  */}
+
     );
   }
 }
