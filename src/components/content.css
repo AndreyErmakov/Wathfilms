@@ -1,11 +1,8 @@
-#content{
-    padding-top: 60px;
-    
-}
 .content{
    
     padding-right: 0px !important;
     padding-left: 0px !important;
+    padding-top: 60px !important;
 }
 
 .content > button{
@@ -18,15 +15,13 @@
 }
 
 .cart > a > img {
-    width: 185px;
-    height: 300px;
+    width: 100%;
+    height: 280px;
 }
-
-#films >a {
-    margin: 2px;
+.col-md-2.movies {
+    padding-right: 3px;
+    padding-left: 3px;
 }
-
-#films > div {
-    padding-left: 2px;
-    padding-right: 2px;
+.navbar.content > button {
+    margin-bottom: 5px;
 }

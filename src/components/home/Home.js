@@ -1,21 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import NavMovies from '../newMovies/navMovies'
-import NewMovies from '../newMovies/NewMovies'
-import NavFilms from '../films/navFilms'
-import Films from '../films/Films'
+
+import ListFilm from '../films/ListFilm'
+import ListNewMovies from '../newMovies/ListNewMovies'
+
 import NavSerials from '../serials/navSerials'
 import Serials from '../serials/Serials'
 
-export default class Home extends Component {
+
+ class Home extends Component {
   render() {
     return (
       <div>
-        <NavMovies />
-        <NewMovies />
+      
+        <ListNewMovies newMovies={this.props.newMovies} />
 
-        <NavFilms />
-        <Films />
+        <ListFilm films={this.props.films} />
 
         <NavSerials />
         <Serials />
@@ -23,3 +24,17 @@ export default class Home extends Component {
     )
   }
 }
+
+
+const mapStateToProps = store => {
+  console.log(store.films);
+  
+ return {
+    films: store.films,
+    newMovies:store.newMovies
+  }
+}
+
+
+
+export default connect(mapStateToProps)(Home)
