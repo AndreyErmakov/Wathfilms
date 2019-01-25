@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {setMovies} from '../../actions/MoviesActions'
+// import * as actions from '../../actions'
 import Iframe from 'react-iframe'
 
  class Movies extends Component {
+  // componentWillMount(){
+  //   const movieId = this.props.match.params.id
+
+  //   this.props.dispatch(actions.fetchRentalById(movieId))
+  // }
+  
+  
   render() {
+    // const moviesId = this.props.match.params.id
+    // console.log(moviesId);
+    console.log(this.props);
+    
     return (
       <div className='content'>
         <Iframe  url={this.props.url.url}
@@ -21,9 +32,9 @@ import Iframe from 'react-iframe'
   }
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = state => {
   return {
-    url: store.url,
+    url: state.url,
     
   }
 }

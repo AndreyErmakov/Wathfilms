@@ -8,7 +8,7 @@ export default class Films extends Component {
       return(
                 <div className='col-md-2 movies' key={index}>
                   <div className='cart'>
-                    <a >
+                    <a href=''>
                       <img src={film.img} className="card-img-top"></img>
                     </a>
                   </div>

@@ -25,3 +25,7 @@
 .navbar.content > button {
     margin-bottom: 5px;
 }
+.cart {
+    width: 184px;
+    height: 280px;
+}

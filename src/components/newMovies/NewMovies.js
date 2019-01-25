@@ -10,8 +10,8 @@ export default class NewMovies extends Component {
       return(
         <div key={index} className='col-md-2 movies'>
           <div className='cart'>
-            <Link to='/movies'>
-             <img src={newMovi.img} className="card-img-top"></img>
+            <Link to={'/movies:'+newMovi.kinopoisk_id}>
+             <img src={'https://st.kp.yandex.net/images/film_iphone/iphone360_'+newMovi.kinopoisk_id+'.jpg'} className="card-img-top"></img>
             </Link>
           </div>
         </div>

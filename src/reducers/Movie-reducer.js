@@ -1,5 +1,5 @@
 const initialState = {
-  url:'//hdgo.club/video/Q298nQsLY481iJzUPrlwVnRh6EqC8Ctd/25886/'
+  url:'https://hdgo.top/video/trailer/Q298nQsLY481iJzUPrlwVnRh6EqC8Ctd/25948/'
 }
 
 
