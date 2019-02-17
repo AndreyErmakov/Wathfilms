@@ -5,11 +5,10 @@ import { store }  from './reducers/cofigureStore'
 
 import './App.css';
 import Header from './components/header/Header.js'
-import Home from './components/home/Home'
-import Movies  from './components/movies/Movies'
-
-
-
+import Main from './components/main'
+import Menu from './components/menu/Menu'
+import Movie  from './components/movie/Movie'
+import Categoria  from './components/categoria'
 
 
 class App extends Component {
@@ -19,14 +18,15 @@ class App extends Component {
         <BrowserRouter >
           <div className='container'>
             <Header />
-
-            <Route exact path='/' component={Home} />
-            <Route exact path='/movies/:id' component={Movies} />
+            <Menu/>
+            <Route exact path='/' component={Main} />
+            <Route exact  path='/:categoria-:id' component={Categoria} />
+            <Route exact  path='/:categoria/:id' component={Movie} />
           </div>
         </BrowserRouter>
        </Provider>
     );
   }
 }
-
+ 
 export default App;

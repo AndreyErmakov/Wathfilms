@@ -1,40 +1,93 @@
 const express = require('express')
 const router  = express.Router()
 const Films   = require('../models/films')
-const request = require('request');
-const db = require('./db')
+const Serials   = require('../models/serials')
+
 
 
 router.get('', function(req,res){
-  Films.find().limit(6).exec(function(err,r){
-
-    if (err) throw res.send(err) 
-    res.json(r)
-  })
+  Promise.all([
+        Films.find({year:2019}).limit(6).exec(),
+        Films.find().limit(6).exec(),
+        Serials.find().limit(6).exec()
+      ]).then(function(result) {
+        var arr = {}
+        arr.newMovies = result[0]
+        arr.films    = result[1]
+        arr.serials    = result[2]
+        res.json(arr)
+      }).catch();
 })
 
-router.post('', function(req,res){
-    Films.where('_id').gt(req.body.newFilmsUpdate).limit(6).exec(function(err,result) {
-       if (err) throw res.send(err) 
-      res.json(result)
-      })
+router.post('/newMovies', function(req,res){
+  Films.find({year:2019}).where('_id').gt(req.body.newFilmsUpdate).limit(6).exec(function(err,r) {
+    if(r.length < 6){
+      const quan = 6 - r.length
+        Films.find({year:2019}).limit(quan).exec(function(err, result){
+        result.forEach(function(res){
+          r.push(res)
+        })
+          res.json({newMovies:r})
+        
+        })
+    }else{
+      if (err) throw res.send(err) 
+    res.json({newMovies:r})
+    }
+    })
 })
-// var arr =[{"kinopoisk_id":"1129833","name":"\u0410\u0441\u0442\u0435\u0440\u0438\u043a\u0441 \u0438 \u0442\u0430\u0439\u043d\u043e\u0435 \u0437\u0435\u043b\u044c\u0435","name_eng":"","year":"2018","sub_type":"cartoons","url":"\/\/hdgo.club\/video\/Q298nQsLY481iJzUPrlwVnRh6EqC8Ctd\/24928\/"}]
+router.post('/films', function(req,res){
+  Films.find().where('_id').gt(req.body.newFilmsUpdate).limit(6).exec(function(err,r) {
+    if(r.length < 6){
+      const quan = 6 - r.length
+        Films.find().limit(quan).exec(function(err, result){
+        result.forEach(function(res){
+          r.push(res)
+        })
+          res.json({films:r})
+        
+        })
+    }else{
+      if (err) throw res.send(err) 
+    res.json({films:r})
+    }
+    })
+})
 
-// var str = JSON.stringify(arr)
-// var p = JSON.parse(str)
-// console.log(p);
+
+router.post('/serials', function(req,res){
+  Serials.find().where('_id').gt(req.body.serialsUpdate).limit(6).exec(function(err,r) {
+    if(r.length < 6){
+      const quan = 6 - r.length
+        Serials.find().limit(quan).exec(function(err, result){
+        result.forEach(function(res){
+          r.push(res)
+        })
+          res.json({serials:r})
+        
+        })
+    }else{
+      if (err) throw res.send(err) 
+    res.json({serials:r})
+    }
+    })
+})
 
 
- var counter = 0
+
+module.exports = router
+
+
+// const request = require('request');
+// const db = require('./dbserial')
+
+//  var counter = 0
 // db.forEach(function(res){
 
 //     if(res.kinopoisk_id != 0){
-//       // counter++
-//       if(counter > 600&& counte/r <= 700){
+//       counter++
+//       if(counter > 200&& counter <= 500){
 //         const url = 'http://hdgo.club/api/video.json'; 
-//         var answer = '';
-
 //         request({
 //           method: 'GET',
 //           url: url,
@@ -46,11 +99,11 @@ router.post('', function(req,res){
           
 //           cd = JSON.parse(body)
           
-//           //  console.log('cd',cd[0]);
+//             // console.log('cd',cd[0]);
 
           
-//            var films = new Films(cd[0]);
-//             films.save(function(err){
+//            var serials = new Serials(cd[0]);
+//             serials.save(function(err){
 //                 if(err) return console.log(err);
 //                 console.log('ок');
 //             });
@@ -66,20 +119,27 @@ router.post('', function(req,res){
 //     }
 // })
 
+//addYear in db 
 
+// var counter = 0
 // db.forEach(function(result,index){
+//    if(result.kinopoisk_id != 0){
+
 //   counter++
 //   if(counter <= 500){
 //     var year = JSON.parse(result.year)
    
-//     Films.update({kinopoisk_id:+result.kinopoisk_id},{$set:{year:result.year}}, function(err, result){
+//     Serials.update({kinopoisk_id:+result.kinopoisk_id},{$set:{year:result.year}}, function(err, result){
 //       console.log(result);
       
 //     })
 //       console.log(result);
     
 //   }
+//   }
 // })
+
+
 /*
 Product.updateOne(
     {_id: id},
@@ -99,6 +159,3 @@ Product.updateOne(
 
 
 
-
-
-module.exports = router

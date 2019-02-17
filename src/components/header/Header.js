@@ -1,17 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import * as actions  from '../../actions'
 import {Link} from 'react-router-dom'
 import './header.css'
 
-export default class Header extends Component {
-  render() {
+class Header extends Component {
+
+  render(){
+    const { showHideMenu } = this.props 
     return (
        <nav className="navbar navbar-expand navbar-dark fixed-top bg-dark">
         <div className='container' id='header'>
-        
-          <Link className="navbar-brand" to='/'>Wach#Films</Link>
+          <Link className="navbar-brand" to='/'>Watch#Films</Link>
+
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="#"><span className="navbar-toggler-icon"></span> Menu</a>
+               <button onClick={()=>showHideMenu(true)}  className="btn btn-outline-primary"><span className="navbar-toggler-icon"></span> Menu</button>
             </li>
           </ul>
           <div className="collapse navbar-collapse" id="navbarsHeder">
@@ -20,10 +24,19 @@ export default class Header extends Component {
               <input className="form-control" type="text" placeholder="Search" />
             </form>
           </div>
-          
-           <a href="" id='icon-user'><i className="fa fa-user-secret" aria-hidden="true"></i></a>
+          <button  className="btn btn-outline-primary"><i className="fa fa-user-secret" aria-hidden="true"></i></button>
         </div>
       </nav>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+ return {
+    showMenu: state.request.showMenu,
+    
+  }
+}
+
+
+export default connect(mapStateToProps, actions)(Header)
